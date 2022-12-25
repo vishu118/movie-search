@@ -16,8 +16,9 @@ const moiveBox = document.querySelector("#movie-box");
 
 const getMovies = async (api) => {
   const response = await fetch(api);
-  const data = await response.json();
-  // console.log(data)
+  // console.log(response)
+  const data = await response.json();         
+  console.log(data)
   showMovies(data.results);
 };
 
@@ -49,6 +50,7 @@ const find = document.getElementById("search");
 find.addEventListener("keyup",  
   function(event){
     if (event.target.value != ""){
+      // console.log(event.target.value)
         getMovies(search+event.target.value)
     }else{
         getMovies(apiUrl);
@@ -113,3 +115,6 @@ getMovies(apiUrl);
 //     getMovies(APIURL);
 //   }
 // });
+
+
+// [ 2, 3 ,4 ,5 ,5]
