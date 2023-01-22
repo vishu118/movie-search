@@ -12,38 +12,44 @@ const search =
 
 //searched movie api.
 
-const moiveBox = document.querySelector("#movie-box");
+const movieMainContainer = document.querySelector("#moviemaincontainer");
+const poster = document.querySelector(".movie_poster");
+const movie_info = document.querySelector(".movie_info");
+
 
 const getMovies = async (api) => {
   const response = await fetch(api);
-  // console.log(response)
+  console.log(response)
   const data = await response.json();         
   console.log(data)
   showMovies(data.results);
 };
 
 const showMovies = (data) => {
-    moiveBox.innerHTML = "";
+  movieMainContainer.innerHTML = "";
   data.forEach((item) => {
-    const box = document.createElement("div");
-    box.classList.add("box");
-    box.innerHTML = `
-            <img src = "${IMGPATH + item.poster_path}" alt="" />
+    const moviecontainer = document.createElement("div");
+    moviecontainer.classList.add("moviecontainer");
+    moviecontainer.innerHTML = `
+            <img src = "${IMGPATH + item.poster_path}" alt=""  class="movie_poster"/>
 
-            <div class="overlay">
+            <div class="movie_info">
                 <div class="title"> 
                     <h2> ${item.original_title}  </h2>
                     <span> ${item.vote_average} <span>
                 </div>
-                <h3>Overview:</h3>
-                <p> 
+                <h3 class="overview">Overview:</h3>
+                <p class="movie_discription"> 
                     "${item.overview}"
                 </p>
              </div>
      `;
-    moiveBox.appendChild(box);
+     movieMainContainer.appendChild(moviecontainer);
   });
 };
+
+
+
 
 const find = document.getElementById("search");
 
@@ -60,7 +66,14 @@ find.addEventListener("keyup",
 
 
 
+
 getMovies(apiUrl);
+// poster.forEach((ele)=>{
+//   ele.addEventListener('mouseover',()=>{
+//     overlay.style.display="block"
+// })
+
+// })
 
 // init call
 
